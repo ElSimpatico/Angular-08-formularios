@@ -10,10 +10,10 @@
 
                 <input #nombre="ngModel" class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" required minlength="5">
                 <div *ngIf="nombre?.errors?.required">
-                    este campo es requerido
+                    Este campo es requerido
                 </div>
                 <div *ngIf="nombre?.errors?.minlength">
-                    por lo menos {{nombre.errors.minlength.requiredLength}} caracteres
+                    Por lo menos {{nombre.errors.minlength.requiredLength}} caracteres
                 </div>
             </div>
         </div>
@@ -22,7 +22,10 @@
             <label class="col-2 col-form-label">Apellido</label>
             <div class="col-8">
 
-                <input class="form-control" type="text" placeholder="Apellido" name="apellido" [(ngModel)]="usuario.apellido" required>
+                <input #apellido="ngModel" class="form-control" type="text" placeholder="Apellido" name="apellido" [(ngModel)]="usuario.apellido" required>
+                <div *ngIf="apellido?.errors?.required">
+                    Este campo es requerido
+                </div>
             </div>
         </div>
 
@@ -32,7 +35,13 @@
         <label class="col-2 col-form-label">Correo</label>
         <div class="col-md-8">
 
-            <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <input #correo="ngModel" class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <div *ngIf="correo?.errors?.required">
+                Este campo es requerido
+            </div>
+            <div *ngIf="correo?.errors?.pattern">
+                No cumple el patrón especificado
+            </div>
         </div>
     </div>
 
