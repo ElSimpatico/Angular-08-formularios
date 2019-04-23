@@ -1,6 +1,6 @@
 <h4>Formularios <small>template</small></h4>
 <hr>
-<form ngNativeValidate (ngSubmit)="guardar(forma)" #forma="ngForm">
+<form (ngSubmit)="guardar(forma)" #forma="ngForm">
 
     <div>
 
@@ -8,7 +8,13 @@
             <label class="col-2 col-form-label">Nombre</label>
             <div class="col-8">
 
-                <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" required minlength="5">
+                <input #nombre="ngModel" class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" required minlength="5">
+                <div *ngIf="nombre?.errors?.required">
+                    este campo es requerido
+                </div>
+                <div *ngIf="nombre?.errors?.minlength">
+                    por lo menos {{nombre.errors.minlength.requiredLength}} caracteres
+                </div>
             </div>
         </div>
 
@@ -26,7 +32,7 @@
         <label class="col-2 col-form-label">Correo</label>
         <div class="col-md-8">
 
-            <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="usuario.email" required>
+            <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
         </div>
     </div>
 
